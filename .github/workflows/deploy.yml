@@ -7,6 +7,9 @@ on:
     branches: [main]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - webhook
 
 env:
   NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
