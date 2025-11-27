@@ -12,7 +12,10 @@ import "../styles/global.css";
     <title>Bureau Duplex</title>
   </head>
   <body>
-    <slot />
+    <div class="h-screen flex flex-col">
+      <header>Coucou</header>
+      <div class="grow"><slot /></div>
+    </div>
   </body>
 </html>
 
