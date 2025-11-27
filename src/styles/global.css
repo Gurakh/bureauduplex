@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'OTAlpha';
+    src: url('../assets/fonts/OTAlpha-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OTAlpha';
+    src: url('../assets/fonts/OTAlpha-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OTAlpha';
+    src: url('../assets/fonts/OTAlpha-Semibold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OTAlpha';
+    src: url('../assets/fonts/OTAlpha-SemiboldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'OTAlpha';
+}
+
+[x-cloak] {
+    display: none !important;
+}
