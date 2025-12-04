@@ -1,5 +1,57 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import logo from "../assets/logo_desktop.svg";
+
+const data = [
+  "projet1",
+  "projet2",
+  "projet3",
+  "projet4",
+  "projet5",
+  "projet6",
+  "projet7",
+  "projet8",
+  "projet9",
+  "projet10",
+  "projet11",
+  "projet12",
+];
 ---
 
-<Layout />
+<Layout>
+  <div
+    class="h-full flex-col items-end hidden md:flex"
+    x-data="{showed: 'none'}"
+  >
+    <div class="w-full grow">
+      {
+        data.map((index) => (
+          <div
+            class="h-full"
+            style="border: 1px solid green;"
+            x-show={`showed === '${index}'`}
+            x-cloak
+          >
+            Zone {index}
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex relative">
+      <Image src={logo} alt="Bureau Duplex" />
+      <div class="flex h-full absolute bottom-0 left-0 right-0">
+        {
+          data.map((index) => (
+            <div
+              class="grow h-full"
+              style="border: 1px solid red;"
+              x-on:mouseenter={`showed = '${index}'`}
+              x-on:mouseleave={`showed = 'none'`}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
