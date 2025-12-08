@@ -28,11 +28,11 @@ const data = [
     class="h-full flex-col items-end hidden md:flex"
     x-data="{showed: 'none'}"
   >
-    <div class="relative z-30 w-full grow">
+    <div class="w-full grow">
       {
         data.map((index) => (
           <div
-            class="h-full bg-white dark:bg-black"
+            class="h-full relative z-30 bg-white dark:bg-black"
             style="border: 1px solid green;"
             x-show={`showed === '${index}'`}
             x-cloak
