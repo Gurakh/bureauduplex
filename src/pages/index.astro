@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import logo from "../assets/logo_desktop.svg";
+import DesktopLogo from "../components/DesktopLogo.astro";
+import MobileLogoTop from "../components/MobileLogoTop.astro";
+import MobileLogoBottom from "../components/MobileLogoBottom.astro";
 
 const data = [
   "projet1",
@@ -20,6 +21,9 @@ const data = [
 ---
 
 <Layout>
+  <div class="md:hidden" slot="before-content">
+    <MobileLogoTop />
+  </div>
   <div
     class="h-full flex-col items-end hidden md:flex"
     x-data="{showed: 'none'}"
@@ -38,8 +42,8 @@ const data = [
         ))
       }
     </div>
-    <div class="flex relative">
-      <Image src={logo} alt="Bureau Duplex" />
+    <div class="flex relative w-full">
+      <DesktopLogo />
       <div class="flex h-full absolute bottom-0 left-0 right-0">
         {
           data.map((index) => (
@@ -53,5 +57,8 @@ const data = [
         }
       </div>
     </div>
+  </div>
+  <div class="md:hidden" slot="after-content">
+    <MobileLogoBottom />
   </div>
 </Layout>

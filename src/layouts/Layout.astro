@@ -1,12 +1,12 @@
 ---
 import "../styles/global.css";
 import { Image } from "astro:assets";
-import logoTop from "../assets/logo_mobile_1.svg";
-import logoBottom from "../assets/logo_mobile_2.svg";
+
+import DarkMode from "../components/DarkMode.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-white dark:bg-black dark:text-white antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -21,11 +21,12 @@ import logoBottom from "../assets/logo_mobile_2.svg";
           <li>Bureau Duplex</li>
           <li>Index</li>
           <li>About</li>
+          <DarkMode />
         </ul>
       </header>
-      <Image class="w-full md:hidden" src={logoTop} alt="Bureau Duplex" />
+      <slot name="before-content" />
       <div class="grow"><slot /></div>
-      <Image class="w-full md:hidden" src={logoBottom} alt="Bureau Duplex" />
+      <slot name="after-content" />
     </div>
   </body>
 </html>
