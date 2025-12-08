@@ -31,20 +31,25 @@ const data = [
   <body>
     <div
       class="h-screen flex flex-col p-3"
-      x-data="{index: false, about: false}"
+      x-data="{duplex: false, index: false, about: false}"
     >
       <header>
         <ul class="flex items-center justify-between uppercase text-sm mb-3">
-          <li>Bureau Duplex</li>
           <li>
             <button
-              x-on:click="index = !index; about = false"
+              x-on:click="duplex = !duplex; about = false; index = false"
+              class="uppercase cursor-pointer">Bureau Duplex</button
+            >
+          </li>
+          <li>
+            <button
+              x-on:click="index = !index; about = false; duplex = false"
               class="uppercase cursor-pointer">Index</button
             >
           </li>
           <li>
             <button
-              x-on:click="about = !about; index = false"
+              x-on:click="about = !about; index = false; duplex = false"
               class="uppercase cursor-pointer">About</button
             >
           </li>
@@ -75,7 +80,7 @@ const data = [
             ))
           }
         </ul>
-        <ul
+        <div
           class="w-full absolute top-16 md:top-32 right-0 left-0"
           x-show="about"
           x-cloak
@@ -87,7 +92,20 @@ const data = [
             info@bureau-duplex.ch <br />
             +41 78 665 01 50
           </p>
-        </ul>
+        </div>
+        <div
+          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          x-show="duplex"
+          x-cloak
+        >
+          <p class="text-lg md:text-sm max-w-[640px]">
+            Fondé en 2013, BUREAUDUPLEX est un studio de création alliant
+            direction artistique, design graphique, deisgn éditorial,
+            illustration et motion design. Cette approche pluridisciplinaire lui
+            permet de concevoir des outils narratifs adaptés à chaque projet,
+            dans les champs culturels et commerciaux.
+          </p>
+        </div>
         <slot />
       </div>
       <slot name="after-content" />
