@@ -28,11 +28,11 @@ const data = [
     class="h-full flex-col items-end hidden md:flex"
     x-data="{showed: 'none'}"
   >
-    <div class="w-full grow">
+    <div class="relative z-30 w-full grow">
       {
         data.map((index) => (
           <div
-            class="h-full"
+            class="h-full bg-white dark:bg-black"
             style="border: 1px solid green;"
             x-show={`showed === '${index}'`}
             x-cloak
@@ -50,7 +50,7 @@ const data = [
             <div
               class="grow h-full"
               style="border: 1px solid red;"
-              x-on:mouseenter={`showed = '${index}'`}
+              x-on:mouseenter={`showed = '${index}';`}
               x-on:mouseleave={`showed = 'none'`}
             />
           ))

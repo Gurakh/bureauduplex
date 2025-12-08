@@ -1,8 +1,22 @@
 ---
 import "../styles/global.css";
-import { Image } from "astro:assets";
 
 import DarkMode from "../components/DarkMode.astro";
+
+const data = [
+  "projet1",
+  "projet2",
+  "projet3",
+  "projet4",
+  "projet5",
+  "projet6",
+  "projet7",
+  "projet8",
+  "projet9",
+  "projet10",
+  "projet11",
+  "projet12",
+];
 ---
 
 <!doctype html>
@@ -15,17 +29,67 @@ import DarkMode from "../components/DarkMode.astro";
     <title>Bureau Duplex</title>
   </head>
   <body>
-    <div class="h-screen flex flex-col p-3">
+    <div
+      class="h-screen flex flex-col p-3"
+      x-data="{index: false, about: false}"
+    >
       <header>
         <ul class="flex justify-between uppercase text-sm mb-3">
           <li>Bureau Duplex</li>
-          <li>Index</li>
-          <li>About</li>
+          <li>
+            <button
+              x-on:click="index = !index; about = false"
+              class="uppercase cursor-pointer">Index</button
+            >
+          </li>
+          <li>
+            <button
+              x-on:click="about = !about; index = false"
+              class="uppercase cursor-pointer">About</button
+            >
+          </li>
           <DarkMode />
         </ul>
       </header>
       <slot name="before-content" />
-      <div class="grow"><slot /></div>
+      <div class="grow relative">
+        <ul
+          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          x-show="index"
+          x-cloak
+        >
+          {
+            data.map((index) => (
+              <li>
+                <a class="flex text-lg md:text-sm" href="#">
+                  <span class="grow">Audemars Piguet</span>
+                  <span class="grow hidden md:inline">
+                    Mémorendum Volontriat
+                  </span>
+                  <span class="grow hidden md:inline">
+                    DA, identité visuelle, Illustration, design editorial
+                  </span>
+                  <span>2022</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul
+          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          x-show="about"
+          x-cloak
+        >
+          <p class="text-lg md:text-sm">
+            Parc du Loup 1a <br />
+            1018 Lausanne <br />
+            CH – Switzetland <br />
+            info@bureau-duplex.ch <br />
+            +41 78 665 01 50
+          </p>
+        </ul>
+        <slot />
+      </div>
       <slot name="after-content" />
     </div>
   </body>
