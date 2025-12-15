@@ -2,6 +2,9 @@
 import "../styles/global.css";
 
 import DarkMode from "../components/DarkMode.astro";
+import { Image } from "astro:assets";
+import catImage from "../assets/cat1.avif";
+import cat2Image from "../assets/cat2.avif";
 
 const data = [
   "projet1",
@@ -64,9 +67,14 @@ const data = [
           x-cloak
         >
           {
-            data.map((index) => (
-              <li>
-                <a class="flex text-lg md:text-sm" href="#">
+            data.map((_, index) => (
+              <li x-data="{image: false}">
+                <a
+                  class="flex text-lg md:text-sm relative z-20"
+                  href="#"
+                  @mouseover="image = true"
+                  @mouseout="image = false"
+                >
                   <span class="grow">Audemars Piguet</span>
                   <span class="grow hidden md:inline">
                     Mémorendum Volontriat
@@ -76,6 +84,23 @@ const data = [
                   </span>
                   <span>2022</span>
                 </a>
+                <div
+                  class="absolute -top-16 z-10"
+                  x-show="image"
+                  x-cloak
+                  x-transition:enter="transition delay-100 duration-300"
+                  x-transition:enter-start="opacity-0 transform -translate-x-10"
+                  x-transition:enter-end="opacity-100 transform translate-x-0"
+                  x-transition:leave="transition duration-300"
+                  x-transition:leave-start="opacity-100 transform translate-x-0"
+                  x-transition:leave-end="opacity-0 transform translate-x-10"
+                >
+                  <Image
+                    class="max-w-1/2 mx-auto"
+                    src={index % 2 ? catImage : cat2Image}
+                    alt="Test"
+                  />
+                </div>
               </li>
             ))
           }
