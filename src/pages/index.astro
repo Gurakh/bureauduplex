@@ -4,6 +4,10 @@ import DesktopLogo from "../components/DesktopLogo.astro";
 import MobileLogoTop from "../components/MobileLogoTop.astro";
 import MobileLogoBottom from "../components/MobileLogoBottom.astro";
 
+import { Image } from "astro:assets";
+import catImage from "../assets/cat1.avif";
+import cat2Image from "../assets/cat2.avif";
+
 const data = [
   "projet1",
   "projet2",
@@ -28,16 +32,83 @@ const data = [
     class="h-full flex-col items-end hidden md:flex"
     x-data="{showed: 'none'}"
   >
-    <div class="w-full grow">
+    <div class="w-full grow relative">
       {
-        data.map((index) => (
+        data.map((project, index) => (
           <div
-            class="relative z-30 h-full bg-white dark:bg-black"
-            style="border: 1px solid green;"
-            x-show={`showed === '${index}'`}
+            class="absolute inset-0 z-30"
+            x-show={`showed === '${project}'`}
             x-cloak
           >
-            Zone {index}
+            <div class="h-full py-32 grid grid-cols-1 content-stretch">
+              <div
+                class="flex text-lg md:text-sm relative z-20"
+                x-show={`showed === '${project}'`}
+                x-transition:enter="transition duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-4"
+              >
+                <span class="grow">Audemars Piguet</span>
+                <span class="grow hidden md:inline">Mémorendum Volontriat</span>
+                <span class="grow hidden md:inline">
+                  DA, identité visuelle, Illustration, design editorial
+                </span>
+                <span>2022</span>
+              </div>
+              <div
+                class="flex text-lg md:text-sm relative z-20"
+                x-show={`showed === '${project}'`}
+                x-transition:enter="transition duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-4"
+              >
+                <span class="grow">Audemars Piguet</span>
+                <span class="grow hidden md:inline">Mémorendum Volontriat</span>
+                <span class="grow hidden md:inline">
+                  DA, identité visuelle, Illustration, design editorial
+                </span>
+                <span>2022</span>
+              </div>
+              <div
+                class="flex text-lg md:text-sm relative z-20"
+                x-show={`showed === '${project}'`}
+                x-transition:enter="transition duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-4"
+              >
+                <span class="grow">Audemars Piguet</span>
+                <span class="grow hidden md:inline">Mémorendum Volontriat</span>
+                <span class="grow hidden md:inline">
+                  DA, identité visuelle, Illustration, design editorial
+                </span>
+                <span>2022</span>
+              </div>
+            </div>
+            <div
+              class="absolute top-16"
+              x-show={`showed === '${project}'`}
+              x-transition:enter="transition duration-300"
+              x-transition:enter-start="opacity-0 transform -translate-x-10"
+              x-transition:enter-end="opacity-100 transform translate-x-0"
+              x-transition:leave="transition duration-300"
+              x-transition:leave-start="opacity-100 transform translate-x-0"
+              x-transition:leave-end="opacity-0 transform translate-x-10"
+            >
+              <Image
+                class="max-w-1/2 mx-auto"
+                src={index % 2 ? catImage : cat2Image}
+                alt="Test"
+              />
+            </div>
           </div>
         ))
       }
@@ -49,7 +120,6 @@ const data = [
           data.map((index) => (
             <div
               class="grow h-full"
-              style="border: 1px solid red;"
               x-on:mouseenter={`showed = '${index}';`}
               x-on:mouseleave={`showed = 'none'`}
             />
