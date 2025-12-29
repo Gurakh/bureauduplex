@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../../layouts/Layout.astro";
+import catImage from "../../assets/cat1.avif";
+
+export async function getStaticPaths() {
+  return [{ params: { project: "projet" } }];
+}
+
+const data = [
+  "projet1",
+  "projet2",
+  "projet3",
+  "projet4",
+  "projet5",
+  "projet6",
+  "projet7",
+  "projet8",
+  "projet9",
+  "projet10",
+  "projet11",
+  "projet12",
+];
+---
+
+<Layout>
+  <p class="flex text-lg md:text-sm relative z-50 mt-32">
+    <span class="grow">Audemars Piguet</span>
+    <span class="grow hidden md:inline"> Mémorendum Volontriat </span>
+    <span class="grow hidden md:inline">
+      DA, identité visuelle, Illustration, design editorial
+    </span>
+    <span>2022</span>
+  </p>
+  <Image src={catImage} alt="cat image" class="mt-5" />
+  <p class="text-xl mt-3">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ut rem nobis
+    aspernatur, numquam consectetur officiis, quas quod facilis dolores dolor
+    dolorem explicabo nostrum ducimus, eligendi non natus aperiam error?
+  </p>
+  <div class="grid grid-cols-3 gap-x-5 mt-10">
+    <div class="col-span-2 col-start-2 mb-3">
+      <Image src={catImage} alt="cat image" />
+      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+    </div>
+    <div class="col-span-2 mb-3">
+      <Image src={catImage} alt="cat image" />
+      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+    </div>
+    <div class="col-span-2 mb-3">
+      <Image src={catImage} alt="cat image" />
+      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+    </div>
+    <div class="col-span-3 grid grid-cols-3 gap-x-5 mb-3">
+      <div>
+        <Image src={catImage} alt="cat image" />
+        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+      </div>
+      <div>
+        <Image src={catImage} alt="cat image" />
+        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+      </div>
+      <div>
+        <Image src={catImage} alt="cat image" />
+        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
+      </div>
+    </div>
+  </div>
+  <p class="text-lg md:text-sm mt-5">
+    Design: Laurent Alleman <br />
+    Photographies: Thomas Rousset <br />
+    Illustrations: Pierre Andrey <br />
+    Code: Franck Da Silva
+  </p>
+  <hr class="my-5" />
+  <ul class="mb-5">
+    <li>
+      <span class="flex text-lg md:text-sm relative z-50 text-gray-400">
+        <span class="grow">Audemars Piguet</span>
+        <span class="grow hidden md:inline">Mémorendum Volontriat</span>
+        <span class="grow hidden md:inline">
+          DA, identité visuelle, Illustration, design editorial
+        </span>
+        <span>2022</span>
+      </span>
+    </li>
+    {
+      data.map((_, index) => (
+        <li>
+          <a class="flex text-lg md:text-sm relative z-50" href="#">
+            <span class="grow">Audemars Piguet</span>
+            <span class="grow hidden md:inline">Mémorendum Volontriat</span>
+            <span class="grow hidden md:inline">
+              DA, identité visuelle, Illustration, design editorial
+            </span>
+            <span>2022</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
