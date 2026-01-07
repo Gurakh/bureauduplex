@@ -1,10 +1,22 @@
 ---
 import "../styles/global.css";
 
-import DarkMode from "../components/DarkMode.astro";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+import DarkMode from "../components/DarkMode.astro";
 import catImage from "../assets/cat1.avif";
 import cat2Image from "../assets/cat2.avif";
+
+const notionContents = await getCollection("notionContent");
+
+const projects = notionContents.map((notionContent) => {
+  return {
+    ...notionContent.data,
+  };
+});
+
+console.log(projects);
 
 const data = [
   "projet1",
