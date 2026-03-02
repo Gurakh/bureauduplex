@@ -18,19 +18,34 @@ const projects = notionContents.map((notionContent) => {
 
 console.log(projects);
 
+const fakeProject = {
+  icon: null,
+  cover: null,
+  archived: false,
+  in_trash: false,
+  url: "https://www.notion.so/Memorendum-Volontariat-2a860f2885d080ceab21c209378f81c6",
+  public_url: null,
+  properties: {
+    project: "Memorendum Volontariat",
+    client: "EPFL",
+    tags: "test,test,test,test",
+    year: "2022",
+  },
+};
+
 const data = [
-  "projet1",
-  "projet2",
-  "projet3",
-  "projet4",
-  "projet5",
-  "projet6",
-  "projet7",
-  "projet8",
-  "projet9",
-  "projet10",
-  "projet11",
-  "projet12",
+  ...projects,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
+  fakeProject,
 ];
 ---
 
@@ -79,7 +94,7 @@ const data = [
           x-cloak
         >
           {
-            data.map((_, index) => (
+            data.map((project) => (
               <li x-data="{image: false}">
                 <a
                   class="flex text-lg md:text-sm relative z-50"
@@ -87,32 +102,35 @@ const data = [
                   @mouseover="image = true"
                   @mouseout="image = false"
                 >
-                  <span class="grow">Audemars Piguet</span>
+                  <span class="grow">{project.properties.client}</span>
                   <span class="grow hidden md:inline">
-                    Mémorendum Volontriat
+                    {project.properties.project}
                   </span>
                   <span class="grow hidden md:inline">
-                    DA, identité visuelle, Illustration, design editorial
+                    {project.properties.tags}
                   </span>
-                  <span>2022</span>
+                  <span>{project.properties.year}</span>
                 </a>
-                <div
-                  class="absolute -top-16 z-10"
-                  x-show="image"
-                  x-cloak
-                  x-transition:enter="transition duration-300"
-                  x-transition:enter-start="opacity-0 transform -translate-x-10"
-                  x-transition:enter-end="opacity-100 transform translate-x-0"
-                  x-transition:leave="transition duration-300"
-                  x-transition:leave-start="opacity-100 transform translate-x-0"
-                  x-transition:leave-end="opacity-0 transform translate-x-10"
-                >
-                  <Image
-                    class="max-w-1/2 mx-auto"
-                    src={index % 2 ? catImage : cat2Image}
-                    alt="Test"
-                  />
-                </div>
+                {project.cover && project.cover.type === "file" && (
+                  <div
+                    class="absolute -top-16 z-10"
+                    x-show="image"
+                    x-cloak
+                    x-transition:enter="transition duration-300"
+                    x-transition:enter-start="opacity-0 transform -translate-x-10"
+                    x-transition:enter-end="opacity-100 transform translate-x-0"
+                    x-transition:leave="transition duration-300"
+                    x-transition:leave-start="opacity-100 transform translate-x-0"
+                    x-transition:leave-end="opacity-0 transform translate-x-10"
+                  >
+                    <Image
+                      class="max-w-1/2 mx-auto"
+                      src={project.cover.file.url}
+                      inferSize={true}
+                      alt="Test"
+                    />
+                  </div>
+                )}
               </li>
             ))
           }
