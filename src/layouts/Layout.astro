@@ -5,8 +5,6 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 import DarkMode from "../components/DarkMode.astro";
-import catImage from "../assets/cat1.avif";
-import cat2Image from "../assets/cat2.avif";
 
 const notionContents = await getCollection("notionContent");
 
@@ -15,38 +13,6 @@ const projects = notionContents.map((notionContent) => {
     ...notionContent.data,
   };
 });
-
-console.log(projects);
-
-const fakeProject = {
-  icon: null,
-  cover: null,
-  archived: false,
-  in_trash: false,
-  url: "https://www.notion.so/Memorendum-Volontariat-2a860f2885d080ceab21c209378f81c6",
-  public_url: null,
-  properties: {
-    project: "Memorendum Volontariat",
-    client: "EPFL",
-    tags: "test,test,test,test",
-    year: "2022",
-  },
-};
-
-const data = [
-  ...projects,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-  fakeProject,
-];
 ---
 
 <!doctype html>
@@ -94,7 +60,7 @@ const data = [
           x-cloak
         >
           {
-            data.map((project) => (
+            projects.map((project) => (
               <li x-data="{image: false}">
                 <a
                   class="flex text-lg md:text-sm relative z-50"
