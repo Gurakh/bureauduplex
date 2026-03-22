@@ -1,6 +1,6 @@
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
-import { notionLoader } from "notion-astro-loader";
+import { notionLoader } from '@luanroger/notion-astro-loader';
 import {
   notionPageSchema,
   transformedPropertySchema,
@@ -9,7 +9,8 @@ import {
 const notionContent = defineCollection({
   loader: notionLoader({
     auth: import.meta.env.NOTION_TOKEN,
-    database_id: import.meta.env.NOTION_DATABASE_ID,
+    dataSourceId: import.meta.env.NOTION_DATABASE_ID,
+    imageSavePath: 'assets/images/projects',
   }),
   schema: notionPageSchema({
     properties: z.object({
