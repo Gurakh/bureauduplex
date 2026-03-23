@@ -9,11 +9,7 @@ import { getCollection } from "astro:content";
 
 const notionContents = await getCollection("notionContent");
 
-const projects = notionContents.map((notionContent) => {
-  return {
-    ...notionContent.data,
-  };
-});
+const projects = notionContents.map((notionContent) => notionContent.data);
 ---
 
 <Layout>
@@ -85,7 +81,7 @@ const projects = notionContents.map((notionContent) => {
           projects.map((_, index) => (
             <div
               class="grow h-full"
-              x-on:mouseenter={`showed = 'project${index}';`}
+              x-on:mouseenter={`duplex = false; about = false; index = false; showed = 'project${index}';`}
               x-on:mouseleave={`showed = 'none'`}
             />
           ))

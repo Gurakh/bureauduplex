@@ -79,7 +79,7 @@ const projects = notionContents.map((notionContent) => {
                 </a>
                 {project.cover && project.cover.type === "file" && (
                   <div
-                    class="absolute -top-16 z-10"
+                    class="hidden md:block absolute -top-16 z-10"
                     x-show="image"
                     x-cloak
                     x-transition:enter="transition duration-300"
