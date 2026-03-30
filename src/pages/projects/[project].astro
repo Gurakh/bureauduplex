@@ -1,11 +1,20 @@
 ---
+import slugify from "slugify-ts";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 import catImage from "../../assets/cat1.avif";
 
 export async function getStaticPaths() {
-  return [{ params: { project: "projet" } }];
+  const projects = await getCollection("notionContent");
+
+  return projects.map((project) => {
+    return {
+      params: { project: slugify(project.data.properties.project) },
+      props: project,
+    };
+  });
 }
 
 const data = [

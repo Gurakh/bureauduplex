@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 
+import slugify from "slugify-ts";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
@@ -64,7 +65,7 @@ const projects = notionContents.map((notionContent) => {
               <li x-data="{image: false}">
                 <a
                   class="flex text-lg md:text-sm relative z-50"
-                  href="#"
+                  href={`/projects/${slugify(project.properties.project)}`}
                   @mouseover="image = true"
                   @mouseout="image = false"
                 >
@@ -92,7 +93,8 @@ const projects = notionContents.map((notionContent) => {
                     <Image
                       class="max-w-1/2 mx-auto"
                       src={project.cover.file.url}
-                      inferSize={true}
+                      width={100}
+                      height={100}
                       alt=""
                     />
                   </div>
