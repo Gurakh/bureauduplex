@@ -71,11 +71,11 @@ body {
 }
 
 .notion-content > .notion-column_list {
-    @apply md:col-span-3 md:grid md:grid-cols-3 md:gap-x-5 mb-3;
+    @apply md:col-span-3 md:grid md:grid-cols-3 md:gap-x-5;
 }
 
 .notion-content > .notion-column_list .notion-image {
-    @apply h-full flex flex-col;
+    @apply h-full flex flex-col mb-3;
 }
 
 .notion-content > .notion-column_list img {
