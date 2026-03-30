@@ -56,7 +56,7 @@ const projects = notionContents.map((notionContent) => {
       <slot name="before-content" />
       <div class="grow relative">
         <ul
-          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          class="w-full absolute top-16 md:top-32 right-0 left-0 bg-white dark:bg-black z-9999 pb-10"
           x-show="index"
           x-cloak
         >
@@ -93,8 +93,7 @@ const projects = notionContents.map((notionContent) => {
                     <Image
                       class="max-w-1/2 mx-auto"
                       src={project.cover.file.url}
-                      width={100}
-                      height={100}
+                      inferSize={true}
                       alt=""
                     />
                   </div>
@@ -104,7 +103,7 @@ const projects = notionContents.map((notionContent) => {
           }
         </ul>
         <div
-          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          class="w-full absolute top-16 md:top-32 right-0 left-0 bg-white dark:bg-black z-9999 pb-10"
           x-show="about"
           x-cloak
         >
@@ -117,7 +116,7 @@ const projects = notionContents.map((notionContent) => {
           </p>
         </div>
         <div
-          class="w-full absolute top-16 md:top-32 right-0 left-0"
+          class="w-full absolute top-16 md:top-32 right-0 left-0 bg-white dark:bg-black z-9999 pb-10"
           x-show="duplex"
           x-cloak
         >
