@@ -64,16 +64,16 @@ const projects = notionContents.map((notionContent) => {
             projects.map((project) => (
               <li x-data="{image: false}">
                 <a
-                  class="flex text-lg md:text-sm relative z-50"
+                  class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50"
                   href={`/projects/${slugify(project.properties.project)}`}
                   @mouseover="image = true"
                   @mouseout="image = false"
                 >
-                  <span class="grow">{project.properties.client}</span>
-                  <span class="grow hidden md:inline">
+                  <span>{project.properties.client}</span>
+                  <span class="hidden md:inline">
                     {project.properties.project}
                   </span>
-                  <span class="grow hidden md:inline">
+                  <span class="hidden md:inline">
                     {project.properties.tags}
                   </span>
                   <span>{project.properties.year}</span>

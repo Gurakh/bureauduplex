@@ -1,14 +1,15 @@
 ---
 import slugify from "slugify-ts";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 import Layout from "../../layouts/Layout.astro";
 import catImage from "../../assets/cat1.avif";
 
+const projects = await getCollection("notionContent");
+
 export async function getStaticPaths() {
   const projects = await getCollection("notionContent");
-
   return projects.map((project) => {
     return {
       params: { project: slugify(project.data.properties.project) },
@@ -17,96 +18,66 @@ export async function getStaticPaths() {
   });
 }
 
-const data = [
-  "projet1",
-  "projet2",
-  "projet3",
-  "projet4",
-  "projet5",
-  "projet6",
-  "projet7",
-  "projet8",
-  "projet9",
-  "projet10",
-  "projet11",
-  "projet12",
-];
+const entry = Astro.props;
+console.log(entry);
+const { Content } = await render(entry);
 ---
 
 <Layout>
-  <p class="flex text-lg md:text-sm relative z-50 mt-32">
-    <span class="grow">Audemars Piguet</span>
-    <span class="grow hidden md:inline"> Mémorendum Volontriat </span>
-    <span class="grow hidden md:inline">
-      DA, identité visuelle, Illustration, design editorial
+  <p
+    class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50 mt-32"
+  >
+    <span>{entry.data.properties.client}</span>
+    <span class="hidden md:inline">
+      {entry.data.properties.project}
     </span>
-    <span>2022</span>
+    <span class="hidden md:inline">
+      {entry.data.properties.tags}
+    </span>
+    <span>{entry.data.properties.year}</span>
   </p>
-  <Image src={catImage} alt="cat image" class="mt-5" />
-  <p class="text-xl mt-3">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ut rem nobis
-    aspernatur, numquam consectetur officiis, quas quod facilis dolores dolor
-    dolorem explicabo nostrum ducimus, eligendi non natus aperiam error?
-  </p>
-  <div class="md:grid md:grid-cols-3 md:gap-x-5 mt-10">
-    <div class="md:col-span-2 md:col-start-2 mb-3">
-      <Image src={catImage} alt="cat image" />
-      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-    </div>
-    <div class="md:col-span-2 mb-3">
-      <Image src={catImage} alt="cat image" />
-      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-    </div>
-    <div class="md:col-span-2 mb-3">
-      <Image src={catImage} alt="cat image" />
-      <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-    </div>
-    <div class="md:col-span-3 md:grid md:grid-cols-3 md:gap-x-5 mb-3">
-      <div>
-        <Image src={catImage} alt="cat image" />
-        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-      </div>
-      <div>
-        <Image src={catImage} alt="cat image" />
-        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-      </div>
-      <div>
-        <Image src={catImage} alt="cat image" />
-        <p class="text-xs mt-1">Flyer format 15 recto/verso</p>
-      </div>
-    </div>
+  <div class="notion-content">
+    <Content />
   </div>
-  <p class="text-lg md:text-sm mt-5">
-    Design: Laurent Alleman <br />
-    Photographies: Thomas Rousset <br />
-    Illustrations: Pierre Andrey <br />
-    Code: Franck Da Silva
-  </p>
   <hr class="my-5" />
   <ul class="mb-5">
-    <li>
-      <span class="flex text-lg md:text-sm relative z-50 text-gray-400">
-        <span class="grow">Audemars Piguet</span>
-        <span class="grow hidden md:inline">Mémorendum Volontriat</span>
-        <span class="grow hidden md:inline">
-          DA, identité visuelle, Illustration, design editorial
-        </span>
-        <span>2022</span>
-      </span>
-    </li>
     {
-      data.map((_, index) => (
-        <li>
-          <a class="flex text-lg md:text-sm relative z-50" href="#">
-            <span class="grow">Audemars Piguet</span>
-            <span class="grow hidden md:inline">Mémorendum Volontriat</span>
-            <span class="grow hidden md:inline">
-              DA, identité visuelle, Illustration, design editorial
-            </span>
-            <span>2022</span>
-          </a>
-        </li>
-      ))
+      projects.map((project) => {
+        if (project.id === entry.id) {
+          return (
+            <li>
+              <span class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50 text-gray-400">
+                <span>{project.data.properties.client}</span>
+                <span class="hidden md:inline">
+                  {project.data.properties.project}
+                </span>
+                <span class="hidden md:inline">
+                  {project.data.properties.tags}
+                </span>
+                <span>{project.data.properties.year}</span>
+              </span>
+            </li>
+          );
+        }
+
+        return (
+          <li>
+            <a
+              class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50"
+              href={`/projects/${slugify(project.data.properties.project)}`}
+            >
+              <span>{project.data.properties.client}</span>
+              <span class="hidden md:inline">
+                {project.data.properties.project}
+              </span>
+              <span class="hidden md:inline">
+                {project.data.properties.tags}
+              </span>
+              <span>{project.data.properties.year}</span>
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 </Layout>

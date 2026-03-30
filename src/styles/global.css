@@ -45,3 +45,43 @@ body {
 [x-cloak] {
     display: none !important;
 }
+
+.notion-content>.notion-image:first-child {
+    @apply mt-5;
+}
+
+.notion-content>.notion-image:first-child .notion-caption {
+    @apply text-xl mt-3;
+}
+
+.notion-content .notion-caption {
+    @apply text-xs mt-1;
+}
+
+.notion-content > .notion-image:not(:first-child) {
+    @apply md:grid md:grid-cols-3 md:gap-x-5 mt-10 mb-3;
+}
+
+.notion-content > .notion-image:not(:first-child):nth-child(even) * {
+    @apply md:col-span-2 md:col-start-2;
+}
+
+.notion-content > .notion-image:not(:first-child):nth-child(odd) * {
+    @apply md:col-span-2;
+}
+
+.notion-content > .notion-column_list {
+    @apply md:col-span-3 md:grid md:grid-cols-3 md:gap-x-5 mb-3;
+}
+
+.notion-content > .notion-column_list .notion-image {
+    @apply h-full flex flex-col;
+}
+
+.notion-content > .notion-column_list img {
+    @apply grow object-cover;
+}
+
+.notion-content > p {
+    @apply text-lg md:text-sm my-5;
+}

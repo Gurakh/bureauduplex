@@ -32,7 +32,7 @@ const projects = notionContents.map((notionContent) => notionContent.data);
             <div class="h-full py-32 grid grid-cols-1 content-stretch">
               {[0, 1, 2].map((_) => (
                 <div
-                  class="flex text-lg md:text-sm relative z-20"
+                  class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-20"
                   x-show={`showed === 'project${index}'`}
                   x-transition:enter="transition duration-300"
                   x-transition:enter-start="opacity-0 transform translate-y-4"
@@ -41,11 +41,11 @@ const projects = notionContents.map((notionContent) => notionContent.data);
                   x-transition:leave-start="opacity-100 transform translate-y-0"
                   x-transition:leave-end="opacity-0 transform -translate-y-4"
                 >
-                  <span class="grow">{project.properties.client}</span>
-                  <span class="grow hidden md:inline">
+                  <span>{project.properties.client}</span>
+                  <span class="hidden md:inline">
                     {project.properties.project}
                   </span>
-                  <span class="grow hidden md:inline">
+                  <span class="hidden md:inline">
                     {project.properties.tags}
                   </span>
                   <span>{project.properties.year}</span>
