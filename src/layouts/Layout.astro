@@ -28,29 +28,30 @@ const projects = notionContents.map((notionContent) => {
   <body>
     <div
       class="h-screen flex flex-col p-5"
-      x-data="{duplex: false, index: false, about: false}"
+      x-data="{index: false, about: false}"
     >
       <header>
-        <ul class="flex items-center justify-between uppercase text-sm mb-3">
+        <ul
+          class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] uppercase text-sm mb-3"
+        >
           <li>
-            <button
-              x-on:click="duplex = !duplex; about = false; index = false"
-              class="uppercase cursor-pointer">Bureau Duplex</button
-            >
+            <a href="/" class="uppercase">Bureau Duplex</a>
           </li>
           <li>
             <button
-              x-on:click="index = !index; about = false; duplex = false"
+              x-on:click="index = !index; about = false"
               class="uppercase cursor-pointer">Index</button
             >
           </li>
           <li>
             <button
-              x-on:click="about = !about; index = false; duplex = false"
+              x-on:click="about = !about; index = false"
               class="uppercase cursor-pointer">About</button
             >
           </li>
-          <DarkMode />
+          <li class="text-right">
+            <DarkMode />
+          </li>
         </ul>
       </header>
       <slot name="before-content" />
@@ -64,7 +65,7 @@ const projects = notionContents.map((notionContent) => {
             projects.map((project) => (
               <li x-data="{image: false}">
                 <a
-                  class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50"
+                  class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] text-lg md:text-sm relative z-50"
                   href={`/projects/${slugify(project.properties.project)}`}
                   @mouseover="image = true"
                   @mouseout="image = false"
@@ -76,7 +77,7 @@ const projects = notionContents.map((notionContent) => {
                   <span class="hidden md:inline">
                     {project.properties.tags}
                   </span>
-                  <span>{project.properties.year}</span>
+                  <span class="text-right">{project.properties.year}</span>
                 </a>
                 {project.cover && project.cover.type === "file" && (
                   <div
@@ -93,7 +94,8 @@ const projects = notionContents.map((notionContent) => {
                     <Image
                       class="max-w-1/2 mx-auto"
                       src={project.cover.file.url}
-                      inferSize={true}
+                      height={100}
+                      width={100}
                       alt=""
                     />
                   </div>
@@ -107,25 +109,19 @@ const projects = notionContents.map((notionContent) => {
           x-show="about"
           x-cloak
         >
+          <p class="text-lg md:text-sm max-w-[640px] mb-4">
+            Fondé en 2013, BUREAUDUPLEX est un studio de création alliant
+            direction artistique, design graphique, deisgn éditorial,
+            illustration et motion design. Cette approche pluridisciplinaire lui
+            permet de concevoir des outils narratifs adaptés à chaque projet,
+            dans les champs culturels et commerciaux.
+          </p>
           <p class="text-lg md:text-sm">
             Parc du Loup 1a <br />
             1018 Lausanne <br />
             CH – Switzetland <br />
             info@bureau-duplex.ch <br />
             +41 78 665 01 50
-          </p>
-        </div>
-        <div
-          class="w-full absolute top-16 md:top-32 right-0 left-0 bg-white dark:bg-black z-9999 pb-10"
-          x-show="duplex"
-          x-cloak
-        >
-          <p class="text-lg md:text-sm max-w-[640px]">
-            Fondé en 2013, BUREAUDUPLEX est un studio de création alliant
-            direction artistique, design graphique, deisgn éditorial,
-            illustration et motion design. Cette approche pluridisciplinaire lui
-            permet de concevoir des outils narratifs adaptés à chaque projet,
-            dans les champs culturels et commerciaux.
           </p>
         </div>
         <slot />

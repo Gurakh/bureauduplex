@@ -24,7 +24,7 @@ const { Content } = await render(entry);
 
 <Layout>
   <p
-    class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50 mt-32"
+    class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] text-lg md:text-sm relative z-50 mt-32"
   >
     <span>{entry.data.properties.client}</span>
     <span class="hidden md:inline">
@@ -33,7 +33,7 @@ const { Content } = await render(entry);
     <span class="hidden md:inline">
       {entry.data.properties.tags}
     </span>
-    <span>{entry.data.properties.year}</span>
+    <span class="text-right">{entry.data.properties.year}</span>
   </p>
   <div class="notion-content">
     <Content />
@@ -45,7 +45,7 @@ const { Content } = await render(entry);
         if (project.id === entry.id) {
           return (
             <li>
-              <span class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50 text-gray-400">
+              <span class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] text-lg md:text-sm relative z-50 text-gray-400">
                 <span>{project.data.properties.client}</span>
                 <span class="hidden md:inline">
                   {project.data.properties.project}
@@ -53,7 +53,7 @@ const { Content } = await render(entry);
                 <span class="hidden md:inline">
                   {project.data.properties.tags}
                 </span>
-                <span>{project.data.properties.year}</span>
+                <span class="text-right">{project.data.properties.year}</span>
               </span>
             </li>
           );
@@ -62,7 +62,7 @@ const { Content } = await render(entry);
         return (
           <li>
             <a
-              class="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto] text-lg md:text-sm relative z-50"
+              class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] text-lg md:text-sm relative z-50"
               href={`/projects/${slugify(project.data.properties.project)}`}
             >
               <span>{project.data.properties.client}</span>
@@ -72,7 +72,7 @@ const { Content } = await render(entry);
               <span class="hidden md:inline">
                 {project.data.properties.tags}
               </span>
-              <span>{project.data.properties.year}</span>
+              <span class="text-right">{project.data.properties.year}</span>
             </a>
           </li>
         );
