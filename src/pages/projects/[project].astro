@@ -63,7 +63,7 @@ const { Content } = await render(entry);
           <li>
             <a
               class="grid grid-cols-[minmax(0,1fr)_50px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_50px] text-lg md:text-sm relative z-50"
-              href={`/projects/${slugify(project.data.properties.project)}`}
+              href={`${import.meta.env.BASE_URL}/projects/${slugify(project.data.properties.project)}`}
             >
               <span>{project.data.properties.client}</span>
               <span class="hidden md:inline">
