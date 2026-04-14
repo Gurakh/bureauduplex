@@ -85,7 +85,7 @@ const projects = notionContents.map((notionContent) => notionContent.data);
               class="grow h-full"
               x-on:mouseenter={`about = false; index = false; showed = 'project${index}';`}
               x-on:mouseleave={`showed = 'none'`}
-              href={`${import.meta.env.BASE_URL}/projects/${slugify(project.properties.project)}`}
+              href={`/projects/${slugify(project.properties.project)}`}
             />
           ))
         }
